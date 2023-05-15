@@ -1,5 +1,6 @@
 #!/bin/bash
 mongosh <<EOF
+  disableTelemetry()
   var cfg = {
     "_id": "rs0",
     "version": 1,

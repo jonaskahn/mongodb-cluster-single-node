@@ -9,9 +9,9 @@ networks:
 
 services:
   mongo:
-    hostname: mongo
-    container_name: mongo
-    image: mongo
+    hostname: mongodb
+    container_name: mongodb
+    image: mongo:6
     ports:
       - "27018:27017"
     restart: unless-stopped
