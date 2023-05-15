@@ -1,0 +1,31 @@
+version: "3"
+
+volumes:
+  minio_storage:
+
+networks:
+  app:
+    driver: bridge
+
+services:
+  mongo:
+    hostname: mongo
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27018:27017"
+    restart: unless-stopped
+    command:
+      - "/usr/bin/mongod"
+      - "--keyFile"
+      - "/data/replica.key"
+      - "--bind_ip_all"
+      - "--replSet"
+      - "rs0"
+    volumes:
+      - ./db:/data/db
+      - ./config:/data/configdb
+      - ./keyfile:/data/replica.key
+      - ./scripts:/scripts
+    networks:
+      - app
