@@ -1,8 +1,8 @@
 #!/bin/bash
 
 openssl rand -base64 758 > /etc/replica.key
-chmod 400 /etc/replica.key
 chown 999:999 /etc/replica.key
+chmod 400 /etc/replica.key
 
 set -Eeuo pipefail
 
