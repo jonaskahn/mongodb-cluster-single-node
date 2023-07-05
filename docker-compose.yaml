@@ -1,7 +1,8 @@
 version: "3"
 
 volumes:
-  minio_storage:
+  db:
+  config:
 
 networks:
   app:
@@ -23,8 +24,8 @@ services:
       - "--replSet"
       - "rs0"
     volumes:
-      - ./db:/data/db
-      - ./config:/data/configdb
+      - db:/data/db
+      - config:/data/configdb
       - ./keyfile:/data/replica.key
       - ./scripts:/scripts
     networks:
