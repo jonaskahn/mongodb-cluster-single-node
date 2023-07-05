@@ -1,10 +1,16 @@
 #!/bin/bash
-
-openssl rand -base64 758 > /etc/replica.key
-chown 999:999 /etc/replica.key
-chmod 400 /etc/replica.key
-
 set -Eeuo pipefail
+
+KEYFILE=/etc/replica.key
+if [ -f "$KEYFILE" ]; then
+    echo "Start mongo cluster"
+    sleep 1
+else 
+    openssl rand -base64 758 > /etc/replica.key
+    chown 999:999 /etc/replica.key
+    chmod 400 /etc/replica.key
+fi
+
 
 if [ "${1:0:1}" = '-' ]; then
 	set -- mongod "$@"
@@ -423,3 +429,4 @@ fi
 rm -f "$jsonConfigFile" "$tempConfigFile"
 
 exec "$@"
+
